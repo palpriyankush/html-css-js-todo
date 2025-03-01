@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #todoList {
+            list-style-type: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 4px;
+        }
+        .todo-item button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>To-Do List</h1>
+    <input type="text" id="newTask" placeholder="Enter new task" />
+    <button onclick="addTask()">Add Task</button>
+    
+    <ul id="todoList"></ul>
+
+    <script>
+        const addTask = () => {
+            const taskInput = document.getElementById('newTask');
+            const taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+
+                const li = document.createElement('li');
+                li.classList.add('todo-item');
+                
+
+                const taskContent = document.createTextNode(taskText);
+                li.appendChild(taskContent);
+                
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = function() {
+                    removeTask(li);
+                };
+                li.appendChild(removeBtn);
+                
+
+                document.getElementById('todoList').appendChild(li);
+                
+                taskInput.value = "";
+            }
+        }
+
+        const removeTask = (taskItem) => {
+            document.getElementById('todoList').removeChild(taskItem);
+        }
+    </script>
+
+</body>
+</html>
